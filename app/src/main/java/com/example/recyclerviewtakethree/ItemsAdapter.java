@@ -6,20 +6,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.AsyncDifferConfig;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ViewHolder which gives us access to our views
-public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
+public class ItemsAdapter extends ListAdapter<Item, ItemsAdapter.ViewHolder> {
 
     // Store a member variable for the items
-    private List<Item> items;
+    private ArrayList<Item> items;
 
-    // Pass in the contact array into the constructor
-    public ItemsAdapter(List<Item> items) {
-        this.items = items;
+    public ItemsAdapter(ArrayList<Item> itemsList) {
+        super(DIFF_CALLBACK);
+        this.items = itemsList;
+    }
+
+    public static final DiffUtil.ItemCallback<Item> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Item>() {
+                @Override
+                public boolean areItemsTheSame(Item oldItem, Item newItem) {
+                    return oldItem.getId() == newItem.getId();
+                }
+                @Override
+                public boolean areContentsTheSame(Item oldItem, Item newItem) {
+                    return (oldItem.getItem().equalsIgnoreCase(newItem.getItem()));
+                }
+            };
+
+    public void addMoreItems(List<Item> newItems) {
+        items.addAll(newItems);
+        submitList(items); // DiffUtil takes care of the check
     }
 
     // Usually involves inflating a layout from XML and returning the holder
@@ -38,16 +60,11 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
     // Involves populating data into the item through holder
     public void onBindViewHolder(ItemsAdapter.ViewHolder holder, int position) {
         // Get the data model based on position
-        Item item = items.get(position);
+        Item item = getItem(position);
 
         // Set item views based on your views and data model
         TextView textView = holder.itemTextView;
         textView.setText(item.getItem());
-    }
-
-    // Returns the total count of items in the list
-    public int getItemCount() {
-        return items.size();
     }
 
     // Provide a direct reference to each of the views within a data item

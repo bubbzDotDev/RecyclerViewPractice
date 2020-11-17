@@ -42,12 +42,16 @@ public class ViewListActivity extends AppCompatActivity {
         // Initialize list and add the first item
         itemsList = Item.createItemsList(itemItem);
 
+
         // Add additional items to the list
         // (Going to try and use the code right below this line in AddAdditionalItemsFragment.java)
         // itemsList.addAll(Item.createItemsList(itemItem));
 
         // Create adapter passing in the item data
         ItemsAdapter adapter = new ItemsAdapter(itemsList);
+
+        // ??? Hmmm.....
+        adapter.addMoreItems(itemsList);
 
         // Set layout manager to position the items
         rvItems.setLayoutManager(new LinearLayoutManager(this));
