@@ -14,9 +14,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    public static final String EXTRA_MESSAGE = "com.example.testingforgetmenot.MESSAGE";
-    EditText item;
-    String itemString;
+    public static final String EXTRA_MESSAGE_NAME = "Item Name";
+    public static final String EXTRA_MESSAGE_DATE = "Item Date";
+    EditText name;
+    EditText date;
+    int id;
+    String nameString;
+    String dateString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,16 +35,19 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ViewListActivity.class);
 
         // Grab views by IDs
-        item = findViewById(R.id.editItemEntry);
+        name = findViewById(R.id.editItemEntry);
+        date = findViewById(R.id.editExpirationDate);
 
-        // Turn it into a String
-        itemString = item.getText().toString();
+        // Turn them into Strings
+        nameString = name.getText().toString();
+        dateString = date.getText().toString();
 
         // Log it!
-        Log.d(TAG, "About to create intent with item: " + itemString);
+        Log.d(TAG, "About to create intent with item: " + nameString + " and " + dateString);
 
         // Have the Intent go to work!
-        intent.putExtra(EXTRA_MESSAGE, itemString);
+        intent.putExtra(EXTRA_MESSAGE_NAME, nameString);
+        intent.putExtra(EXTRA_MESSAGE_DATE, dateString);
         startActivity(intent);
     }
 }

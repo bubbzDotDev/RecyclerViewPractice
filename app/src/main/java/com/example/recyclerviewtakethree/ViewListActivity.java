@@ -18,7 +18,8 @@ public class ViewListActivity extends AppCompatActivity {
 
     private static final String TAG = "ViewListActivity";
     ArrayList<Item> itemsList;
-    String itemString;
+    String nameString;
+    String dateString;
     private Fragment AddAdditionalItemsFragment;
 
     @Override
@@ -28,13 +29,14 @@ public class ViewListActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        itemString = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        nameString = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_NAME);
+        dateString = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_DATE);
 
         // Log it!
-        Log.d(TAG, "Received intent with item: " + itemString);
+        Log.d(TAG, "Received intent with item: " + nameString + " and " + dateString);
 
         // Make it "of type Item"
-        Item itemItem = new Item(itemString);
+        Item itemItem = new Item(nameString, dateString);
 
         // Lookup the RecyclerView in activity layout
         RecyclerView rvItems = findViewById(R.id.rvItems);
@@ -49,7 +51,7 @@ public class ViewListActivity extends AppCompatActivity {
         // Create adapter passing in the item data
         ItemsAdapter adapter = new ItemsAdapter(itemsList);
 
-        // ??? Hmmm.....
+        // This makes the program work but it adds the same item twice:
         adapter.addMoreItems(itemsList);
 
         // Set layout manager to position the items

@@ -10,10 +10,15 @@
 
     <TextView
         android:id="@+id/item_name"
-        android:layout_width="0dp"
+        android:layout_width="154dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/item_date"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/message_button"
@@ -21,5 +26,6 @@
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
+        android:text="@string/editListItem"
         android:textSize="12sp" />
 </LinearLayout>
