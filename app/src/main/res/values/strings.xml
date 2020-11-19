@@ -9,4 +9,6 @@
     <string name="add_item">Add Item</string>
     <string name="item">Item</string>
     <string name="editListItem">Edit</string>
+    <string name="expiration_date">Expiration date</string>
+    <string name="category_textView">Category:</string>
 </resources>

@@ -65,8 +65,10 @@ public class ItemsAdapter extends ListAdapter<Item, ItemsAdapter.ViewHolder> {
         // Set item views based on your views and data model
         TextView textViewForItem = holder.itemTextView;
         TextView textViewForDate = holder.dateTextView;
+        TextView textViewForCategory = holder.categoryTextView;
         textViewForItem.setText(item.getItem());
         textViewForDate.setText(item.getDate());
+        textViewForCategory.setText(item.getCategory());
     }
 
     // Provide a direct reference to each of the views within a data item
@@ -76,6 +78,7 @@ public class ItemsAdapter extends ListAdapter<Item, ItemsAdapter.ViewHolder> {
         // for any view that will be set as you render a row
         public TextView itemTextView;
         public TextView dateTextView;
+        public TextView categoryTextView;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -86,6 +89,7 @@ public class ItemsAdapter extends ListAdapter<Item, ItemsAdapter.ViewHolder> {
 
             itemTextView = (TextView) itemView.findViewById(R.id.item_name);
             dateTextView = (TextView) itemView.findViewById(R.id.item_date);
+            categoryTextView = (TextView) itemView.findViewById(R.id.item_category);
         }
     }
 }

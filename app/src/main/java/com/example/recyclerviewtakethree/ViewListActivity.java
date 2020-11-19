@@ -3,15 +3,9 @@ package com.example.recyclerviewtakethree;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-
 import java.util.ArrayList;
 
 public class ViewListActivity extends AppCompatActivity {
@@ -20,7 +14,7 @@ public class ViewListActivity extends AppCompatActivity {
     ArrayList<Item> itemsList;
     String nameString;
     String dateString;
-    private Fragment AddAdditionalItemsFragment;
+    String categoryString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +25,13 @@ public class ViewListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         nameString = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_NAME);
         dateString = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_DATE);
+        categoryString = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_CATEGORY);
 
         // Log it!
-        Log.d(TAG, "Received intent with item: " + nameString + " and " + dateString);
+        Log.d(TAG, "Received intent with item: " + nameString + " and " + dateString + " and " + categoryString);
 
         // Make it "of type Item"
-        Item itemItem = new Item(nameString, dateString);
+        Item itemItem = new Item(nameString, dateString, categoryString);
 
         // Lookup the RecyclerView in activity layout
         RecyclerView rvItems = findViewById(R.id.rvItems);
@@ -59,13 +54,5 @@ public class ViewListActivity extends AppCompatActivity {
 
         // Attach the adapter to the RecyclerView to populate items
         rvItems.setAdapter(adapter);
-    }
-
-    public void addAdditionalItems(View view) {
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.container, AddAdditionalItemsFragment, TAG);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 }
